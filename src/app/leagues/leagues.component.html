@@ -1,0 +1,32 @@
+<div class="container mt-3">
+  <div class="h4">{{league?.name}}</div>
+  <p>{{league?.description}}</p>
+  <div class="my-3">
+    Start From: {{league?.start_date | date}}
+  </div>
+
+  <div class="h5">Matches</div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let match of league?.matches">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{match?.match_name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{match?.match_start_time | date:'short'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col-md-3">
+          <div> Venue: {{match?.match_venue}}</div>
+        </div>
+        <div class="col-md-4">
+          <div><a [routerLink]="['/match', match?.match_id]"> {{match?.team_1_name}} vs {{match?.team_2_name}}</a></div>
+        </div>
+        <div class="col-md-5" *ngIf="match?.match_winning_team>0">
+          <div>{{match?.match_result_desc}}</div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
